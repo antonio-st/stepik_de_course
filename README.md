@@ -1,1 +1,2 @@
-# stepik_de_course
+# Репозиторий по курсу на stepik 
+`Data Engineer с нуля до junior`

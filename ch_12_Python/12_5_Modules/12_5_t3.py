@@ -1,14 +1,3 @@
-# import datetime
-# from datetime import datetime, timedelta
-#
-# date1 = datetime.strptime("2022-01-01", "%Y-%m-%d").date()
-# date2 = datetime.strptime("2022-12-31", "%Y-%m-%d").date()
-#
-# time_diff = date2 - date1
-#
-# print(time_diff.days)
-
-
 from datetime import datetime, timedelta
 
 def calculate_days_between_dates(date1_str, date2_str):

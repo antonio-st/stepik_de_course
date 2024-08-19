@@ -54,28 +54,27 @@ def total_sales_per_product(sales_data):
     а значение общая сумма продаж за эту дату."""
 
     # преобразуем в список списков каждый день продаж, предварительно подсчитывая сумму продаж
-    sum_to_date = []
+    sum_to_product = []
     for i in range(0, len(sales_data)):
         p_name = sales_data[i][0].get("product_name").split("\n")[0]
         p_price = sales_data[i][2].get("price")
         p_quant = sales_data[i][1].get("quantity")
-        sum_to_date.append([p_name, int(p_price) * int(p_quant)])
+        sum_to_product.append([p_name, int(p_price) * int(p_quant)])
 
     # создаем df из полученного выше списка
-    df = pd.DataFrame(sum_to_date, columns=["product_name", "sum_sales"])
+    df = pd.DataFrame(sum_to_product, columns=["product_name", "sum_sales"])
 
     # группируем по дате
-    sum_to_date_df = df.groupby('product_name', as_index=False) \
+    sum_to_product_df = df.groupby('product_name', as_index=False) \
         .agg({'sum_sales': 'sum'}) \
         .sort_values("sum_sales")
-    print(sum_to_date_df)
 
     # иттеративно проходя по каждой строке df записываем данные в словарь
-    dict_sum_on_date = {}
-    for i in range(len(sum_to_date_df)):
-        dict_sum_on_date[sum_to_date_df.loc[i]["product_name"]] = int(sum_to_date_df.loc[i]["sum_sales"])
+    dict_sum_on_product = {}
+    for i in sum_to_product_df.index:
+        dict_sum_on_product[sum_to_product_df.loc[i]["product_name"]] = int(sum_to_product_df.loc[i]["sum_sales"])
 
-    return dict_sum_on_date
+    return dict_sum_on_product
 
 
 def sales_over_time(sales_data):
@@ -96,11 +95,11 @@ def sales_over_time(sales_data):
     # группируем по дате
     sum_to_date_df = df.groupby('date', as_index=False) \
         .agg({'sum_sales': 'sum'}) \
-        .sort_values("date")
+        .sort_values("sum_sales")
 
     # иттеративно проходя по каждой строке df записываем данные в словарь
     dict_sum_on_date = {}
-    for i in range(len(sum_to_date_df)):
+    for i in sum_to_date_df.index:
         dict_sum_on_date[sum_to_date_df.loc[i]["date"]] = int(sum_to_date_df.loc[i]["sum_sales"])
 
     return dict_sum_on_date
@@ -108,5 +107,5 @@ def sales_over_time(sales_data):
 
 sales_data = read_sales_data("sales.csv")
 print(sales_data)
-print(total_sales_per_product(sales_data))
-print(sales_over_time(sales_data))
+print(f"Продукт принес наибольшую выручку : {list(total_sales_per_product(sales_data).items())[-1]} ")
+print(f"День c наибольшей суммой продаж.{list(sales_over_time(sales_data).items())[-1]}")

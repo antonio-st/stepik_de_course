@@ -1,4 +1,5 @@
 import pandas as pd
+from matplotlib import pyplot as plt
 
 
 def read_sales_data(file_path):
@@ -19,34 +20,6 @@ def read_sales_data(file_path):
         result.append([dict1, dict2, dict3, dict4])
         dict1, dict2, dict3, dict4 = {}, {}, {}, {}
     return result
-
-
-# def total_sales_per_product(sales_data):
-#     """Принимает список продаж и возвращает словарь,
-#     где ключ - название продукта, а значение - общая сумма продаж этого продукта"""
-#     sum_apple, sum_pears, sum_plums, sum_cookies, sum_candies = 0, 0, 0, 0, 0
-#     dict_sum = {}
-#     for i in range(0, len(sales_data)):
-#         p_name = sales_data[i][0].get("product_name")
-#         p_price = sales_data[i][2].get("price")
-#         p_quant = sales_data[i][1].get("quantity")
-#         if p_name == "яблоки":
-#             sum_apple += int(p_price) * int(p_quant)
-#         elif p_name == "груши":
-#             sum_pears += int(p_price) * int(p_quant)
-#         elif p_name == "сливы":
-#             sum_plums += int(p_price) * int(p_quant)
-#         elif p_name == "печенье":
-#             sum_cookies += int(p_price) * int(p_quant)
-#         elif p_name == "конфеты Рот-Фронт":
-#             sum_candies += int(p_price) * int(p_quant)
-#
-#     dict_sum["яблоки"] = sum_apple
-#     dict_sum["груши"] = sum_pears
-#     dict_sum["сливы"] = sum_plums
-#     dict_sum["печенье"] = sum_cookies
-#     dict_sum["конфеты Рот-Фронт"] = sum_candies
-#     return dict_sum
 
 
 def total_sales_per_product(sales_data):
@@ -97,6 +70,10 @@ def sales_over_time(sales_data):
         .agg({'sum_sales': 'sum'}) \
         .sort_values("sum_sales")
 
+    # найти строку с max значением pandas df
+    # max_date_value = list(sum_to_date_df.loc[sum_to_date_df['sum_sales'].idxmax()])
+    # return list(max_date_value)
+
     # иттеративно проходя по каждой строке df записываем данные в словарь
     dict_sum_on_date = {}
     for i in sum_to_date_df.index:
@@ -105,7 +82,49 @@ def sales_over_time(sales_data):
     return dict_sum_on_date
 
 
+def show_plt_sales_date(sales_data):
+    "выводит график по продажам по дате"
+    sum_to_date = []
+    for i in range(0, len(sales_data)):
+        p_price = sales_data[i][2].get("price")
+        p_quant = sales_data[i][1].get("quantity")
+        date_p = sales_data[i][3].get("date").split("\n")[0]
+        sum_to_date.append([date_p, int(p_price) * int(p_quant)])
+
+    fig, axs = plt.subplots(1, 1)
+    # создаем df из полученного выше списка
+    df = pd.DataFrame(sum_to_date, columns=["date", "sum_sales"])
+    plt.rcParams['figure.figsize'] = [10, 4]
+    df.groupby('date')['sum_sales'].sum().plot(marker='o', linestyle='-', color='brown')
+    plt.title('Общая сумма продаж по дням')
+    plt.xlabel('День')
+    plt.ylabel('Выручка')
+    plt.gcf().autofmt_xdate()
+
+
+def show_plt_sales_product(sales_data):
+    "выводит график по продажам продуктов"
+    # преобразуем в список списков каждый день продаж, предварительно подсчитывая сумму продаж
+    sum_to_product = []
+    for i in range(0, len(sales_data)):
+        p_name = sales_data[i][0].get("product_name").split("\n")[0]
+        p_price = sales_data[i][2].get("price")
+        p_quant = sales_data[i][1].get("quantity")
+        sum_to_product.append([p_name, int(p_price) * int(p_quant)])
+
+    # создаем df из полученного выше списка
+    df = pd.DataFrame(sum_to_product, columns=["product_name", "sum_sales"])
+
+    plt.rcParams['figure.figsize'] = [10, 4]
+    df.groupby('product_name')['sum_sales'].sum().plot(marker='o', linestyle='-', color='green')
+    plt.title('Общая сумма продаж по продукту')
+    plt.xlabel('Продукт')
+    plt.ylabel('Выручка')
+    plt.gcf().autofmt_xdate()
+
+
 sales_data = read_sales_data("sales.csv")
-print(sales_data)
 print(f"Продукт принес наибольшую выручку : {list(total_sales_per_product(sales_data).items())[-1]} ")
+show_plt_sales_product(sales_data)
 print(f"День c наибольшей суммой продаж.{list(sales_over_time(sales_data).items())[-1]}")
+show_plt_sales_date(sales_data)

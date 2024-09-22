@@ -1,0 +1,5 @@
+#!/bin/bash
+echo "script name $0"
+echo "You name: "
+read user_name
+echo "Hello, $user_name from bash"

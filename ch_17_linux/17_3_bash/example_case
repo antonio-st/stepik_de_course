@@ -1,0 +1,15 @@
+#!/bin/bash
+echo "start script $0"
+echo "read color-> "
+read input_color
+
+case $input_color in
+		"red")
+			echo "Color is red" ;;
+		"blue")
+			echo "Color is blue" ;;
+		"green")
+			echo "Color is green" ;;
+		*)
+			echo "Color is unknown!" ;;
+esac 

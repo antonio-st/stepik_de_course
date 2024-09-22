@@ -1,0 +1,5 @@
+#!/bin/bash
+echo "Current folder"
+pwd
+echo "User"
+whoami

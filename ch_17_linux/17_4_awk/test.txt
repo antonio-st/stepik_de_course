@@ -1,0 +1,2 @@
+this is awk test
+hello from nano!

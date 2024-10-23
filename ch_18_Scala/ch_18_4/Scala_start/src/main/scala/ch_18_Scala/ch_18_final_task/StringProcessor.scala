@@ -16,11 +16,6 @@ package ch_18_final_task
       val strings = List("apple", "cat", "banana", "dog", "elephant")
       val processedStrings = processStrings(strings)
       println(s"Processed strings: $processedStrings")
-
-
-
-
-
     }
   }
 

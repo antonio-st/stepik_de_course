@@ -22,8 +22,7 @@ hdfs dfsadmin -report
 #     DFS Remaining — оставшееся свободное пространство на всех DataNode.
 #     DFS Used — пространство, которое используется для хранения данных в HDFS.
 #     DFS Used% — процент использования пространства в HDFS.
-#     Under replicated blocks — количество блоков, у которых недостаточно реплик.
-#     Blocks with corrupt replicas — количество блоков с повреждёнными репликами.
+#     Under replicated blocks — количество блоков, у которых недостаточно реплик.#     Blocks with corrupt replicas — количество блоков с повреждёнными репликами.
 #     Missing blocks — количество блоков, которые отсутствуют в кластере (потерянные данные).
 #     Live datanodes — количество активных (доступных) DataNode.
 #     Dead datanodes — количество DataNode, которые не в сети или не отвечают.
@@ -37,4 +36,22 @@ hdfs dfsadmin -report
 
 # где лежат реплики
     hdfs fsck /test1/localfile_renamed.txt -files -blocks -locations
+
+
+    # задача 1
+    docker cp calculate_hdfs_directory_size.sh 239d3a3f25ab:/tmp/calculate_hdfs_directory_size.sh
+    
+    # есть ли файл в контейнере
+    docker exec -it 239d3a3f25ab ls /tmp
+    
+    docker exec -it 239d3a3f25ab chmod +x /tmp/calculate_hdfs_directory_size.sh
+    
+    docker exec -it 239d3a3f25ab /tmp/calculate_hdfs_directory_size.sh
+    
+    
+    # установить кол-во партиций 3
+    hdfs dfs -setrep 3 /test1/localfile.txt
+
+    # проверка
+hdfs fsck /test1/localfile.txt -files -blocks -locations
     

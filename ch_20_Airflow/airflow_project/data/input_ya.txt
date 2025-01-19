@@ -1,0 +1,5 @@
+FILE FOR YANDEX DISK
+
+HELLO FROM AIRFLOW !!!!
+
+ТЕСТ!!! ТЕКСТ НА КИРИЛЛИЦЕ

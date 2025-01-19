@@ -177,3 +177,33 @@ with DAG('my_dag', schedule_interval='@daily', start_date=datetime(2023, 1, 1)) 
     )
 ```
 В этом примере у нас есть задача wait_for_api, которая выполняет HTTP-запрос на эндпоинт /api/health с использованием соединения с идентификатором 'my_http_conn'. Сенсор ожидает успешный ответ от сервера (код ответа 2xx). Когда успешный ответ будет получен, задача wait_for_api продолжит выполнение.
+
+<br>
+
+> Чтение файлов в Airflow
+
+```python
+def read_file():
+    file_path = "/opt/airflow/data/input.txt"
+    with open(file_path, "r") as file:
+        content = file.read()
+        print(content)
+
+dag = DAG(
+    dag_id='dag_read_file',
+    start_date=datetime(2025, 1, 15),
+    schedule_interval='@daily',
+    catchup=False
+)
+
+read_file_task = PythonOperator(
+    task_id="read_file_task",
+    python_callable=read_file,
+    dag=dag
+)
+
+bash_read_file = BashOperator(
+    task_id='bash_read_file',
+    bash_command='cat /opt/airflow/data/input.txt')
+
+```

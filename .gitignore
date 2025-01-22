@@ -4,8 +4,11 @@ startJupyter.sh
 *.idea
 .idea
 *.log
+.log/*
+.log
 *.xml
 *.properties
 /ch_12_hadoop/hadoop_docker/docker-hive*
 /ch_12_hadoop/hadoop_docker/docker-hive
-/ch_20_Airflow/airflow_project/logs
+ch_20_Airflow/airflow_project/logs/*
+ch_20_Airflow/airflow_project/logs/

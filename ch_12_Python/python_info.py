@@ -1,14 +1,19 @@
  
 # ======================= строки =============================
 
+# считывание данных
+num1, num2, num3 = int(input()), int(input()), int(input())
+stage1, stage2, stage3 = [int(input()) for _ in range(3)]
+
+# три ввода в список
+results = [int(input()) for _ in range(3)]
+values = {int(input()) for i in range(3)}
+
 print(w_3[1])
 print(w_3[6:12])
 print(f"{w_3[0:12:2]} | с интервалом 2")
 print(w_4[::-1]) # развернуть строку
 
-# считывание данных
-num1, num2, num3 = int(input()), int(input()), int(input())
-stage1, stage2, stage3 = [int(input()) for _ in range(3)]
 
 # округление
 round(sum(numbers1) / len(numbers1), 1)
@@ -54,11 +59,7 @@ list_to_str = " ".join(str_to_list[::-1])
 # список в строку 2
 *list_to_str
 
-#  проверка большой буквы
-any(1 for i in pass_check if i.isupper() is True)
 
-# проверка чиселки в пароле
-is_dig = any(1 for i in pass_check if i.isdigit() is True)
 
 # ============================ if ===============================
 
@@ -82,15 +83,116 @@ if (x > 5 and x < 10) or y == 12:
     print("Либо x в диапазоне от 5 до 10, либо y равно 12.")
 
 
-
-any(i < 50 for i in lst)
-
-
-if len([i for i in hours if i > 90]) >= 1
-
 # сортировка списка
 sorted([a, b, c]
+
+# ======================= цикл for =============================
+
+for i in range(3, 5):
+    print(i)
+# обратное направление
+for i in range(100,1,-1):
+    print(i)
+
+# сумма чисел
+sum_total = 0
+for i in range(1, 101):
+    sum_total += i
+print("Сумма чисел от 1 до 100:", sum_total)
+
+# найти символ в строке
+string = "abracadabra"
+count = 0
+for char in string:
+    if char == 'a':
+        count += 1
+print(f"Символ 'a' встречается {count} раз.")
+
+# факториал
+n = 5
+factorial = 1
+
+for i in range(1, n + 1):
+    factorial *= i
+
+# вывести True
+any(i < 50 for i in lst)
+if len([i for i in hours if i > 90]) >= 1
 
 # проверка спец символов / двойной цикл в list compr
 list_char = ["!", "@", "#", "$", "%", "&", "*"]
 chk_char = 1 if [1 for i in pass_check for j in list_char if i in j] else 0
+
+#  проверка большой буквы
+any(1 for i in pass_check if i.isupper() is True)
+
+# проверка чиселки в пароле
+is_dig = any(1 for i in pass_check if i.isdigit() is True)
+
+
+# ======================= цикл while =============================
+
+while условие:
+    # блок кода, который выполняется, пока условие истинно
+
+i = 1
+while i <= 5:
+    print(i)
+    i += 1  # Увеличиваем значение переменной на 1, чтобы избежать бесконечного цикла
+
+secret_number = 7
+guess = 0
+while guess != secret_number:
+    guess = int(input("Угадайте число: "))
+    if guess == secret_number:
+        print("Вы угадали!")
+    else:
+        print("Неправильно, попробуйте снова!")
+
+# сумма чисел
+input_num = input()
+len_num = len(input_num)
+acc = 0
+while len_num > 0:
+    len_num -= 1
+    acc += int(input_num[len_num - 1])
+
+
+# ======================= break, continue и pass =============================
+
+# Оператор break:
+#     Что делает: Прерывает выполнение цикла и выходит из него полностью, независимо от того, выполнены ли остальные итерации. Цикл завершается, и управление передаётся следующей строке кода после цикла.
+#     Когда использовать: Когда нужно досрочно завершить цикл, если выполнено определённое условие.
+
+for i in range(1, 11):
+    if i == 5:
+        break  # Прерывает цикл, когда i равно 5
+    print(i)
+
+# Оператор continue:
+    # Что делает: Пропускает текущую итерацию цикла и переходит к следующей, не завершая весь цикл.
+    # Когда использовать: Когда нужно пропустить определённые итерации цикла, но продолжить выполнение остальных.
+for i in range(1, 6):
+    if i == 3:
+        continue  # Пропускает текущую итерацию, когда i равно 3
+    print(i)
+
+# Оператор pass:
+# Ничего не делает, это просто заглушка. Он нужен для тех случаев, когда по синтаксическим правилам должен быть блок кода,
+# но по логике на данном этапе выполнения никакие действия не требуются.
+# Это может быть полезно при написании скелета программы или для временной заглушки кода.
+
+
+
+
+# сумма чисел, функциональный стиль
+sum(map(int,nums))
+
+# сумма чисел в списке(список str)
+res_num = sum(map(int, input_num))
+
+# groupby группировка одинаковых элементов
+x.sort()
+
+for i, j in groupby(x):
+    print(i, list(j))

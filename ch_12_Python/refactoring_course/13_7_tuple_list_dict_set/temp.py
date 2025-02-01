@@ -13,6 +13,8 @@
 # print(list("a", 1, "c"))
 # print(("a", 1, "c"))
 
-my_tuple = (1, 2, 3)
-my_tuple = (1, 2, 3, 4)
-print(my_tuple)
+# my_tuple = (1, 2, 3)
+# my_tuple = (1, 2, 3, 4)
+# print(my_tuple)
+# count_dict = {}
+# count_dict[elem] = count_dict.get(elem, 0) + 1

@@ -3,7 +3,6 @@
 
 input_num = input().split()
 acc_sqr = {}
-
 for i in input_num:
     if (int(i) * int(i)) % 2 == 0:
         acc_sqr[int(i)] = int(i) * int(i)

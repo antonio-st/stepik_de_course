@@ -496,6 +496,197 @@ except Exception as e:
     print("Произошла ошибка:", e)
 
 
+------------------------------------- популярные библиотеки ---------------------------------
+
+import matplotlib.pyplot as plt
+
+# Построение линейного графика
+# Данные
+x = [1, 2, 3, 4, 5]
+y = [2, 4, 6, 8, 10]
+
+z = [1, 2, 3, 4, 5]
+o = [14, 12, 10, 8, 6]
+
+
+plt.plot(x, y, label='Линейный график')
+plt.plot(z, o, label='Линейный график')
+plt.xlabel('X-ось')
+plt.ylabel('Y-ось')
+plt.title('Пример линейного графика')
+plt.legend()
+plt.show()
+
+# Построение гистограммы
+data = [1, 2, 2, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 5]
+
+plt.hist(data, bins=5, color='skyblue', edgecolor='brown')
+plt.xlabel('Значения')
+plt.ylabel('Частота')
+plt.title('Пример гистограммы')
+plt.show()
+
+
+# Построение круговой диаграммы
+# Данные
+labels = ['Яблоки', 'Бананы', 'Вишня', 'Даты']
+sizes = [15, 30, 45, 10]
+plt.pie(sizes, labels=labels, autopct='%1.1f%%', startangle=200)
+plt.title('Круговая диаграмма')
+plt.show()
+
+
+## два графика
+# Первый график
+x1 = [1, 2, 3, 4]
+y1 = [1, 4, 9, 16]
+# Второй график
+x2 = [1, 2, 3, 4]
+y2 = [2, 4, 6, 8]
+# Построение первого графика
+plt.subplot(1, 2, 1)  # 1 строка, 2 столбца, 1 график
+plt.plot(x1, y1, 'o-')
+plt.title('Квадраты')
+
+# Построение второго графика
+plt.subplot(1, 2, 2)  # 1 строка, 2 столбца, 2 график
+plt.plot(x2, y2, 's-')
+plt.title('Линия')
+plt.show()
+
+ # ------------ библиотека -------------
+
+# Структура файлов модуля
+# создать папку my_library
+# В скрипте math_operations.py содержимое будет следующим.
+# 1 файл
+
+# 1 файл
+# math_operations.py
+def add(a, b):
+    return a + b
+
+def subtract(a, b):
+    return a - b
+
+def multiply(a, b):
+    return a * b
+
+def divide(a, b):
+    if b == 0:
+        raise ValueError("Деление на ноль невозможно")
+# 2 файл
+# statistics_tools.py
+def mean(numbers):
+    return sum(numbers) / len(numbers) if numbers else 0
+
+def median(numbers):
+    sorted_numbers = sorted(numbers)
+    n = len(sorted_numbers)
+    mid = n // 2
+    if n % 2 == 0:
+        return (sorted_numbers[mid - 1] + sorted_numbers[mid]) / 2
+    return sorted_numbers[mid]
+
+def variance(numbers):
+    avg = mean(numbers)
+    return sum((x - avg) ** 2 for x in numbers)
+
+# 3 файл
+# __init__.py
+from .math_operations import add, subtract, multiply, divide
+from .statistics_tools import mean, median, varian
+
+# импорт и вызов
+from my_library import add, mean
+
+print(add(3, 5))         # Вывод: 8
+print(mean([1, 2, 3, 4]))  # Вывод: 2.5
+
+## -------------- random --------------
+
+import random
+# Генерирует случайное целое число в диапазоне от a до b (включительно).
+random.randint(1, 1000)
+
+# Возвращает случайное число с плавающей точкой в диапазоне от 0.0 до 1.0
+import random
+random.random() #  0.1655714468572238
+
+# Возвращает случайное число с плавающей точкой в диапазоне от a до b. Полезно для более гибкой генерации случайных чисел.
+import random
+random.uniform(1.0, 10.0)
+
+# Возвращает случайный элемент из последовательности, например, из списка или строки.
+colors = ["red", "blue", "green", "yellow"]
+color = random.choice(colors)
+print(color)  # Например, вывод: blue
+
+# Устанавливает начальное значение для генератора случайных чисел, что позволяет воспроизводить
+# те же самые случайные значения при каждом запуске
+random.seed(28)
+print(random.randint(1, 10))  # Будет одинаковый результат при каждом запуске с этим seed
+
+
+import string
+
+print(string.digits)
+print(string.ascii_letters)
+print(string.punctuation)
+# 0123456789
+# abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ
+# !"#$%&'()*+,-./:;<=>?@[\]^_`{|}~
+
+# генерация пароля
+import random
+import string
+
+def generate_password(length=8):
+    characters = string.ascii_letters + string.digits + string.punctuation
+    password = ''.join(random.choices(characters, k=length))
+    return password
+
+print(generate_password(12)) # L06l8>5Qo*qW
+
+# орел - решка
+import random
+def coin():
+    list = ["орел", "решка"]
+    return random.choice(list)
+
+print(coin())
+
+
+
+## --------------------------- math -----------------------
+
+
+import math
+
+print(math.ceil(5.1)) # округление вверх
+print(math.floor(5.9)) # округление вниз
+print(math.trunc(5.8)) # отбрасывание дробного
+print(math.exp(2))         # Вывод: 7.3890560989306495 (e^2)
+print(math.log(8, 2))      # Вывод: 3.0 (логарифм по основанию 2)
+print(math.log10(100))     # Вывод: 2.0 (десятичный логарифм)
+print(math.pow(2, 3))      # Вывод: 8.0 (2^3)
+print(math.sqrt(16))       # Вывод: 4.0 (квадратный корень из 16)
+print(math.fabs(-7.5))     # Вывод: 7.5 (модуль числа)
+print(math.factorial(5))   # Вывод: 120 (5! = 5 * 4 * 3 * 2 * 1)
+print(math.gcd(54, 24))    # Вывод: 6 (наибольший общий делитель 54 и 24)
+math.hypot(3, 4) # гипотенуза 5.0
+
+# Напишите функцию sin_of_angle(angle: float) -> float, которая принимает угол в градусах и возвращает
+# значение синуса этого угла, используя math.radians() и math.sin().
+
+from math import sin, radians
+
+input_num = int(input())
+def sin_of_angle(angle: float) -> float:
+    return round(sin(radians(input_num)), 1)
+
+print(sin_of_angle(input_num))
+
 
 
 

@@ -1,0 +1,25 @@
+services:
+  postgres:
+    image: postgres:13
+    container_name: postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: mydb
+    ports:
+      - "5436:5432"
+    volumes:
+      - ./postgres_data:/var/lib/postgresql/data
+
+  clickhouse:
+    image: yandex/clickhouse-server:latest
+    container_name: clickhouse
+    ports:
+      - "8123:8123"  # HTTP порт для ClickHouse
+      - "9000:9000"  # Порт для взаимодействия с базой данных
+    volumes:
+      - ./clickhouse_data:/var/lib/clickhouse
+
+volumes:
+  postgres_data:
+  clickhouse_data:

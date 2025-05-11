@@ -3,17 +3,17 @@ import json
 
 # Создание производителя Kafka
 producer = KafkaProducer(
-    bootstrap_servers='192.168.100.11:9092',
+    bootstrap_servers='192.168.100.7:9092',
     value_serializer=lambda v: json.dumps(
         v, ensure_ascii=False).encode('utf-8')
 )
 
 # Определение сообщения в формате JSON
 message = {
-    'species': 'Язь',
-    'length': '30',
-    'weight': '250',
-    'w_l_ratio': '8.33'
+    'species': 'Окунь',
+    'length': '50',
+    'weight': '500',
+    'w_l_ratio': '8.28'
 }
 
 # Отправка сообщение в нашу тему Kafka

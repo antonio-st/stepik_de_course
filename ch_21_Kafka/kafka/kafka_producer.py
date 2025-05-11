@@ -5,7 +5,7 @@ from kafka import KafkaProducer
 
 # Параметры подключения к Kafka
 # Замените IP адрес на адрес вашего Kafka-брокера
-bootstrap_servers = '192.168.100.7:9092'
+bootstrap_servers = '192.168.100.11:9092'
 
 # Создание продюсера Kafka
 try:

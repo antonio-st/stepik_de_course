@@ -12,6 +12,8 @@ startJupyter.sh
 /ch_12_hadoop/hadoop_docker/docker-hive*
 /ch_12_hadoop/hadoop_docker/docker-hive
 /ch_20_Airflow/airflow_project/logs/
+/ch_22_Monitoring/22_6_Grafana/clickhouse_data
+/ch_22_Monitoring/22_6_Grafana/clickhouse_logs
 /ch_12_Python/refactoring_course/13_13_connect_db/python_project/postgres_data/
 /ch_12_Python/refactoring_course/13_12_build_python/build/
 /ch_12_Python/refactoring_course/13_13_connect_db/python_project/clickhouse_data/
